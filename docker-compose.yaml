@@ -1,7 +1,8 @@
 version: '3.9'
 
 services:
-  web:
+  myapp:
+    container_name: "react-todo-app"
     build: .
     ports:
       - "8001:8001"
