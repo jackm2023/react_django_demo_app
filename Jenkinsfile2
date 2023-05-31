@@ -9,6 +9,7 @@ pipeline{
         }
         stage("App Build and Deployes"){
             steps{
+              sh 'docker-compose down'
               sh 'docker-compose up -d --no-deps --build myapp'
               echo "App Deployed successfully"
             }
