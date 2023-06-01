@@ -1,8 +1,7 @@
 version: '3.9'
-
 services:
   myapp:
-    container_name: "react-todo-app-CN"
+    container_name: "react-todo-app"
     image: jackmaseeh/react-app-todo:latest
     ports:
       - "8001:8001"
