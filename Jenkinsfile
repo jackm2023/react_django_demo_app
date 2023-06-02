@@ -1,19 +1,19 @@
 pipeline{
     agent {label 'dev'}
     stages{
-        stage("Code Cloning"){
+        stage("Code"){
             steps{
                 git url:'https://github.com/jackm2023/react_django_demo_app.git', branch:'master'
                 echo "App Code cloned successfully"
             }
         }
-        stage("App Build"){
+        stage("Build"){
             steps{
               sh 'docker build . -t jackmaseeh/react-app-todo:latest'
               echo "App Build successfully"
             }
         }
-        stage("App Image Push to Docker Hub"){
+        stage("Push-Docker Hub"){
             steps{
                 withCredentials([usernamePassword(credentialsId:'dockerhubID',passwordVariable:'dockerHubpassword',usernameVariable:'dockerHubusername')]){
                     sh "docker login -u ${env.dockerHubusername} -p ${env.dockerHubpassword}"
@@ -21,7 +21,7 @@ pipeline{
                 }
             }
         }
-        stage("App Deployed"){
+        stage("Deploy"){
             steps{
                 sh 'docker-compose down && docker-compose up -d --no-deps --build myapp'
             }
